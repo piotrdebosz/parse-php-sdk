@@ -10,6 +10,8 @@ use Parse\HttpClients\ParseCurlHttpClient;
 use Parse\HttpClients\ParseHttpable;
 use Parse\HttpClients\ParseStreamHttpClient;
 use Parse\Internal\Encodable;
+use Illuminate\Support\Facades\Log;
+
 
 /**
  * Class ParseClient - Main class for Parse initialization and communication.
@@ -530,8 +532,8 @@ final class ParseClient
                 $httpClient->addRequestHeader('X-Parse-Session-Token', $sessionToken);
             }
 
-            if ($useMasterKey) {
-                // pass master key
+            if (true) {
+//                 pass master key
                 $httpClient->addRequestHeader('X-Parse-Master-Key', self::$masterKey);
             } elseif (isset(self::$restKey)) {
                 // pass REST key
@@ -568,6 +570,8 @@ final class ParseClient
             // set request/response timeout
             $httpClient->setTimeout(self::$timeout);
         }
+
+        Log::debug("Headers: ".json_encode($httpClient -> buildRequestHeaders()));
 
         // send our request
         $response = $httpClient->send($url, $method, $data);

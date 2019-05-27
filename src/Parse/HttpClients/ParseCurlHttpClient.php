@@ -107,7 +107,7 @@ class ParseCurlHttpClient implements ParseHttpable
      *
      * @return array
      */
-    private function buildRequestHeaders()
+    public function buildRequestHeaders()
     {
         // coalesce our header key/value pairs
         $headers = [];
@@ -151,7 +151,7 @@ class ParseCurlHttpClient implements ParseHttpable
     /**
      * Sets up our cURL request in advance
      */
-    public function setup() : void
+    public function setup()
     {
         // init parse curl
         $this->parseCurl->init();

@@ -4,16 +4,14 @@ namespace Parse\Test;
 
 use Parse\ParseConfig;
 
-use PHPUnit\Framework\TestCase;
-
-class ParseConfigTest extends TestCase
+class ParseConfigTest extends \PHPUnit_Framework_TestCase
 {
-    public static function setUpBeforeClass() : void
+    public static function setUpBeforeClass()
     {
         Helper::setUp();
     }
 
-    public function tearDown() : void
+    public function tearDown()
     {
         // clear config on tear down
         Helper::clearClass('_GlobalConfig');

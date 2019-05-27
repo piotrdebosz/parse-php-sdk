@@ -7,9 +7,7 @@ namespace Parse\Test;
 
 use Parse\HttpClients\ParseCurlHttpClient;
 
-use PHPUnit\Framework\TestCase;
-
-class ParseCurlHttpClientTest extends TestCase
+class ParseCurlHttpClientTest extends \PHPUnit_Framework_TestCase
 {
     public function testResponseStatusCode()
     {

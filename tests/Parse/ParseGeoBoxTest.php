@@ -6,21 +6,19 @@ use Parse\ParseGeoPoint;
 use Parse\ParseObject;
 use Parse\ParseQuery;
 
-use PHPUnit\Framework\TestCase;
-
-class ParseGeoBoxTest extends TestCase
+class ParseGeoBoxTest extends \PHPUnit_Framework_TestCase
 {
-    public static function setUpBeforeClass() : void
+    public static function setUpBeforeClass()
     {
         Helper::setUp();
     }
 
-    public function setup() : void
+    public function setUp()
     {
         Helper::clearClass('TestObject');
     }
 
-    public function tearDown() : void
+    public function tearDown()
     {
         Helper::tearDown();
     }

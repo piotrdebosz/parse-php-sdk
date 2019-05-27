@@ -7,16 +7,14 @@ use Parse\ParseGeoPoint;
 use Parse\ParseObject;
 use Parse\ParseUser;
 
-use PHPUnit\Framework\TestCase;
-
-class ParseCloudTest extends TestCase
+class ParseCloudTest extends \PHPUnit_Framework_TestCase
 {
-    public static function setUpBeforeClass() : void
+    public static function setUpBeforeClass()
     {
         Helper::setUp();
     }
 
-    public function tearDown() : void
+    public function tearDown()
     {
         $user = ParseUser::getCurrentUser();
         if (isset($user)) {
@@ -61,7 +59,7 @@ class ParseCloudTest extends TestCase
      */
     public function testFunctionCallException()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Parse\ParseException',
             'bad stuff happened'
         );
@@ -82,7 +80,7 @@ class ParseCloudTest extends TestCase
         $obj->set('name', 'Zanzibar');
         $obj->save();
         $params = ['key1' => $obj];
-        $this->expectException('\Exception', 'ParseObjects not allowed');
+        $this->setExpectedException('\Exception', 'ParseObjects not allowed');
         ParseCloud::run('foo', $params);
     }
 
@@ -92,7 +90,7 @@ class ParseCloudTest extends TestCase
     public function testFunctionsWithGeoPointParamsDoNotThrow()
     {
         $params = ['key1' => new ParseGeoPoint(50, 50)];
-        $this->expectException(
+        $this->setExpectedException(
             'Parse\ParseException',
             'Invalid function: "unknown_function"'
         );
@@ -105,7 +103,7 @@ class ParseCloudTest extends TestCase
     public function testUnknownFunctionFailure()
     {
         $params = ['key1' => 'value1'];
-        $this->expectException(
+        $this->setExpectedException(
             'Parse\ParseException',
             'Invalid function: "unknown_function"'
         );
@@ -156,7 +154,7 @@ class ParseCloudTest extends TestCase
      */
     public function testBadJob()
     {
-        $this->expectException('Parse\ParseException', 'Invalid job.');
+        $this->setExpectedException('Parse\ParseException', 'Invalid job.');
         ParseCloud::startJob('bad_job');
     }
 
@@ -179,7 +177,7 @@ class ParseCloudTest extends TestCase
      */
     public function testGettingNotARealJobStatus()
     {
-        $this->expectException('Parse\ParseException', 'Object not found.');
+        $this->setExpectedException('Parse\ParseException', 'Object not found.');
         $jobStatus = ParseCloud::getJobStatus('not-a-real-job-status');
         $this->assertNull($jobStatus);
     }

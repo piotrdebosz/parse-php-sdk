@@ -6,21 +6,19 @@ use Parse\ParseBytes;
 use Parse\ParseObject;
 use Parse\ParseQuery;
 
-use PHPUnit\Framework\TestCase;
-
-class ParseBytesTest extends TestCase
+class ParseBytesTest extends \PHPUnit_Framework_TestCase
 {
-    public static function setUpBeforeClass() : void
+    public static function setUpBeforeClass()
     {
         Helper::setUp();
     }
 
-    public function setup() : void
+    public function setUp()
     {
         Helper::clearClass('BytesObject');
     }
 
-    public function tearDown() : void
+    public function tearDown()
     {
         Helper::clearClass('BytesObject');
         Helper::tearDown();

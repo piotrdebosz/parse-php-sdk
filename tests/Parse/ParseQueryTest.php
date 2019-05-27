@@ -9,21 +9,19 @@ use Parse\ParseQuery;
 use Parse\ParseUser;
 use Parse\ParseClient;
 
-use PHPUnit\Framework\TestCase;
-
-class ParseQueryTest extends TestCase
+class ParseQueryTest extends \PHPUnit_Framework_TestCase
 {
-    public static function setUpBeforeClass() : void
+    public static function setUpBeforeClass()
     {
         Helper::setUp();
     }
 
-    public function setup() : void
+    public function setUp()
     {
         Helper::clearClass('TestObject');
     }
 
-    public function tearDown() : void
+    public function tearDown()
     {
         Helper::tearDown();
     }
@@ -424,7 +422,7 @@ class ParseQueryTest extends TestCase
         $this->provideTestObjects(10);
         $query = new ParseQuery('TestObject');
         $query->matches('foo', 'bar', 'not-a-real-modifier');
-        $this->expectException('Parse\ParseException', 'Bad $options value for query: not-a-real-modifier', 102);
+        $this->setExpectedException('Parse\ParseException', 'Bad $options value for query: not-a-real-modifier', 102);
         $query->find();
     }
 
@@ -603,7 +601,7 @@ class ParseQueryTest extends TestCase
     public function testFindWithError()
     {
         $query = new ParseQuery('TestObject');
-        $this->expectException('Parse\ParseException', 'Invalid key name: $foo', 105);
+        $this->setExpectedException('Parse\ParseException', 'Invalid key name: $foo', 105);
         $query->equalTo('$foo', 'bar');
         $query->find();
     }
@@ -633,7 +631,7 @@ class ParseQueryTest extends TestCase
         $obj->set('foo', 'bar');
         $obj->save();
         $query = new ParseQuery('TestObject');
-        $this->expectException('Parse\ParseException', 'Object not found', 101);
+        $this->setExpectedException('Parse\ParseException', 'Object not found', 101);
         $query->get('InvalidObjectID');
     }
 
@@ -643,7 +641,7 @@ class ParseQueryTest extends TestCase
         $obj->set('foo', 'bar');
         $obj->save();
         $query = new ParseQuery('TestObject');
-        $this->expectException('Parse\ParseException', 'Object not found', 101);
+        $this->setExpectedException('Parse\ParseException', 'Object not found', 101);
         $query->get(null);
     }
 
@@ -666,7 +664,7 @@ class ParseQueryTest extends TestCase
     {
         $query = new ParseQuery('TestObject');
         $query->equalTo('$foo', 'bar');
-        $this->expectException('Parse\ParseException', 'Invalid key name: $foo', 105);
+        $this->setExpectedException('Parse\ParseException', 'Invalid key name: $foo', 105);
         $query->first();
     }
 
@@ -817,7 +815,7 @@ class ParseQueryTest extends TestCase
     {
         $query = new ParseQuery('Test');
         $query->equalTo('$foo', 'bar');
-        $this->expectException('Parse\ParseException', 'Invalid key name: $foo', 105);
+        $this->setExpectedException('Parse\ParseException', 'Invalid key name: $foo', 105);
         $query->count();
     }
 
@@ -1194,7 +1192,7 @@ class ParseQueryTest extends TestCase
         $query = new ParseQuery('Object');
         $query->lessThanOrEqualTo('x', $count);
         $query->ascending('x');
-        $this->expectException('\Exception', 'sort');
+        $this->setExpectedException('\Exception', 'sort');
         $query->each(
             function ($obj) {
             }
@@ -1217,7 +1215,7 @@ class ParseQueryTest extends TestCase
         $query = new ParseQuery('Object');
         $query->lessThanOrEqualTo('x', $count);
         $query->skip(5);
-        $this->expectException('\Exception', 'skip');
+        $this->setExpectedException('\Exception', 'skip');
         $query->each(
             function ($obj) {
             }
@@ -1240,7 +1238,7 @@ class ParseQueryTest extends TestCase
         $query = new ParseQuery('Object');
         $query->lessThanOrEqualTo('x', $count);
         $query->limit(5);
-        $this->expectException('\Exception', 'limit');
+        $this->setExpectedException('\Exception', 'limit');
         $query->each(
             function ($obj) {
             }
@@ -1641,7 +1639,7 @@ class ParseQueryTest extends TestCase
         $this->provideTestObjectsForOrderBy();
         $query = new ParseQuery('BoxedNumber');
         $query->ascending('_password');
-        $this->expectException('Parse\ParseException', '', 105);
+        $this->setExpectedException('Parse\ParseException', '', 105);
         $query->find();
     }
 
@@ -1777,7 +1775,7 @@ class ParseQueryTest extends TestCase
             $result->get('foo'),
             'Did not return the correct object.'
         );
-        $this->expectException('\Exception', 'Call fetch()');
+        $this->setExpectedException('\Exception', 'Call fetch()');
         $result->get('bar');
     }
 
@@ -1937,7 +1935,7 @@ class ParseQueryTest extends TestCase
         $parent->save();
         $query = new ParseQuery('Parent');
         $result = $query->first();
-        $this->expectException('\Exception', 'Call fetch()');
+        $this->setExpectedException('\Exception', 'Call fetch()');
         $result->get('child')->get('x');
     }
 
@@ -2306,7 +2304,7 @@ class ParseQueryTest extends TestCase
         $obj->setACL($restrictedACL);
         $obj->save();
         $query = new ParseQuery('TestObject');
-        $this->expectException('Parse\ParseException', 'not found');
+        $this->setExpectedException('Parse\ParseException', 'not found');
         $query->get($obj->getObjectId());
     }
 
@@ -2366,7 +2364,7 @@ class ParseQueryTest extends TestCase
 
     public function testOrQueriesVaryingClasses()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Exception',
             'All queries must be for the same class'
         );
@@ -2378,7 +2376,7 @@ class ParseQueryTest extends TestCase
 
     public function testNorQueriesVaryingClasses()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Exception',
             'All queries must be for the same class'
         );
@@ -2390,7 +2388,7 @@ class ParseQueryTest extends TestCase
 
     public function testAndQueriesVaryingClasses()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Exception',
             'All queries must be for the same class'
         );
@@ -2528,7 +2526,7 @@ class ParseQueryTest extends TestCase
 
     public function testNotArrayConditions()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Parse\ParseException',
             "Conditions must be in an array"
         );
@@ -2542,7 +2540,7 @@ class ParseQueryTest extends TestCase
      */
     public function testUnknownCondition()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Parse\ParseException',
             'Unknown condition to set'
         );

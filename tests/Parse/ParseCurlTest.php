@@ -7,13 +7,11 @@ namespace Parse\Test;
 
 use Parse\HttpClients\ParseCurl;
 
-use PHPUnit\Framework\TestCase;
-
-class ParseCurlTest extends TestCase
+class ParseCurlTest extends \PHPUnit_Framework_TestCase
 {
     public function testBadExec()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Parse\ParseException',
             'You must call ParseCurl::init first'
         );
@@ -24,7 +22,7 @@ class ParseCurlTest extends TestCase
 
     public function testBadSetOption()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Parse\ParseException',
             'You must call ParseCurl::init first'
         );
@@ -35,7 +33,7 @@ class ParseCurlTest extends TestCase
 
     public function testBadSetOptionsArray()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Parse\ParseException',
             'You must call ParseCurl::init first'
         );
@@ -46,7 +44,7 @@ class ParseCurlTest extends TestCase
 
     public function testBadGetInfo()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Parse\ParseException',
             'You must call ParseCurl::init first'
         );
@@ -57,7 +55,7 @@ class ParseCurlTest extends TestCase
 
     public function testBadGetError()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Parse\ParseException',
             'You must call ParseCurl::init first'
         );
@@ -68,7 +66,7 @@ class ParseCurlTest extends TestCase
 
     public function testBadErrorCode()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Parse\ParseException',
             'You must call ParseCurl::init first'
         );
@@ -79,7 +77,7 @@ class ParseCurlTest extends TestCase
 
     public function testBadClose()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Parse\ParseException',
             'You must call ParseCurl::init first'
         );

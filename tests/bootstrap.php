@@ -17,4 +17,4 @@ define('APPLICATION_PATH', dirname(__DIR__));
 Helper::setUp();
 $version = ParseServerInfo::getVersion();
 
-fwrite(STDERR, "[ testing against {$version} with curl client ]\n");
+echo "[ testing against {$version} with curl client ]\n";

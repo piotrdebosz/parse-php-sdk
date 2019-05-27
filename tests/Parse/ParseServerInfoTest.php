@@ -8,11 +8,9 @@ namespace Parse\Test;
 use Parse\ParseClient;
 use Parse\ParseServerInfo;
 
-use PHPUnit\Framework\TestCase;
-
-class ParseServerInfoTest extends TestCase
+class ParseServerInfoTest extends \PHPUnit_Framework_TestCase
 {
-    public function setup() : void
+    public function setUp()
     {
         Helper::setHttpClient();
     }
@@ -57,7 +55,7 @@ class ParseServerInfoTest extends TestCase
      */
     public function testMissingFeatures()
     {
-        $this->expectException(
+        $this->setExpectedException(
             'Parse\ParseException',
             'Missing features in server info.'
         );
@@ -92,7 +90,7 @@ class ParseServerInfoTest extends TestCase
      */
     public function testMissingVersion()
     {
-        $this->expectException(
+        $this->setExpectedException(
             'Parse\ParseException',
             'Missing version in server info.'
         );

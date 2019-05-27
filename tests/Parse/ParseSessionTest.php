@@ -6,18 +6,16 @@ use Parse\ParseClient;
 use Parse\ParseSession;
 use Parse\ParseUser;
 
-use PHPUnit\Framework\TestCase;
-
-class ParseSessionTest extends TestCase
+class ParseSessionTest extends \PHPUnit_Framework_TestCase
 {
-    public static function setUpBeforeClass() : void
+    public static function setUpBeforeClass()
     {
         Helper::setUp();
         Helper::clearClass(ParseUser::$parseClassName);
         Helper::clearClass(ParseSession::$parseClassName);
     }
 
-    public function tearDown() : void
+    public function tearDown()
     {
         Helper::tearDown();
         ParseUser::logOut();
@@ -25,7 +23,7 @@ class ParseSessionTest extends TestCase
         Helper::clearClass(ParseSession::$parseClassName);
     }
 
-    public static function tearDownAfterClass() : void
+    public static function tearDownAfterClass()
     {
         ParseUser::_unregisterSubclass();
         ParseSession::_unregisterSubclass();
@@ -55,7 +53,7 @@ class ParseSessionTest extends TestCase
 
         ParseUser::logOut();
 
-        $this->expectException('Parse\ParseException', 'Invalid session token');
+        $this->setExpectedException('Parse\ParseException', 'Invalid session token');
         ParseUser::become($sessionToken);
     }
 
@@ -88,7 +86,7 @@ class ParseSessionTest extends TestCase
     public function testBadUpgradeToRevocableSession()
     {
         // upgrade the current session (changes our session as well)
-        $this->expectException('Parse\ParseException', 'No session to upgrade.');
+        $this->setExpectedException('Parse\ParseException', 'No session to upgrade.');
         ParseSession::upgradeToRevocableSession();
     }
 }

@@ -5,16 +5,14 @@ namespace Parse\Test;
 use Parse\ParseObject;
 use Parse\ParseQuery;
 
-use PHPUnit\Framework\TestCase;
-
-class ParseRelationTest extends TestCase
+class ParseRelationTest extends \PHPUnit_Framework_TestCase
 {
-    public static function setUpBeforeClass() : void
+    public static function setUpBeforeClass()
     {
         Helper::setUp();
     }
 
-    public function tearDown() : void
+    public function tearDown()
     {
         Helper::tearDown();
     }

@@ -21,21 +21,19 @@ use Parse\ParseRole;
 use Parse\ParseSession;
 use Parse\ParseUser;
 
-use PHPUnit\Framework\TestCase;
-
-class ParseObjectTest extends TestCase
+class ParseObjectTest extends \PHPUnit_Framework_TestCase
 {
-    public static function setUpBeforeClass() : void
+    public static function setUpBeforeClass()
     {
         Helper::setUp();
     }
 
-    public function setup() : void
+    public function setUp()
     {
         Helper::setHttpClient();
     }
 
-    public function tearDown() : void
+    public function tearDown()
     {
         Helper::tearDown();
     }
@@ -114,7 +112,7 @@ class ParseObjectTest extends TestCase
         $obj->save();
         $obj->destroy();
         $query = new ParseQuery('TestObject');
-        $this->expectException('Parse\ParseException', 'Object not found');
+        $this->setExpectedException('Parse\ParseException', 'Object not found');
         $query->get($obj->getObjectId());
     }
 
@@ -128,7 +126,7 @@ class ParseObjectTest extends TestCase
             $obj->save();
             $obj->destroy();
             $query = new ParseQuery('TestObject');
-            $this->expectException('Parse\ParseException', 'Object not found');
+            $this->setExpectedException('Parse\ParseException', 'Object not found');
             $query->get($obj->getObjectId());
         }
     }
@@ -317,7 +315,7 @@ class ParseObjectTest extends TestCase
     public function testInvalidClassName()
     {
         $obj = ParseObject::create('Foo^bar');
-        $this->expectException('Parse\ParseException', 'schema class name does not revalidate');
+        $this->setExpectedException('Parse\ParseException', 'schema class name does not revalidate');
         $obj->save();
     }
 
@@ -325,7 +323,7 @@ class ParseObjectTest extends TestCase
     {
         $obj = ParseObject::create('TestItem');
         $obj->set('foo^bar', 'baz');
-        $this->expectException(
+        $this->setExpectedException(
             'Parse\ParseException',
             'Invalid field name: foo^bar.'
         );
@@ -1094,7 +1092,7 @@ class ParseObjectTest extends TestCase
 
     public function testNoRegisteredSubclasses()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Exception',
             'You must initialize the ParseClient using ParseClient::initialize '.
             'and your Parse API keys before you can begin working with Objects.'
@@ -1113,7 +1111,7 @@ class ParseObjectTest extends TestCase
     {
         Helper::setUp();
 
-        $this->expectException(
+        $this->setExpectedException(
             '\Exception',
             'You must specify a Parse class name or register the appropriate '.
             'subclass when creating a new Object.    Use ParseObject::create to '.
@@ -1133,7 +1131,7 @@ class ParseObjectTest extends TestCase
 
     public function testSettingProtectedProperty()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Exception',
             'Protected field could not be set.'
         );
@@ -1266,7 +1264,7 @@ class ParseObjectTest extends TestCase
 
     public function testSetNullKey()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Exception',
             'key may not be null.'
         );
@@ -1276,7 +1274,7 @@ class ParseObjectTest extends TestCase
 
     public function testSetWithArrayValue()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Exception',
             'Must use setArray() or setAssociativeArray() for this value.'
         );
@@ -1286,7 +1284,7 @@ class ParseObjectTest extends TestCase
 
     public function testSetArrayNullKey()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Exception',
             'key may not be null.'
         );
@@ -1296,7 +1294,7 @@ class ParseObjectTest extends TestCase
 
     public function testSetArrayWithNonArrayValue()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Exception',
             'Must use set() for non-array values.'
         );
@@ -1306,7 +1304,7 @@ class ParseObjectTest extends TestCase
 
     public function testAsocSetArrayNullKey()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Exception',
             'key may not be null.'
         );
@@ -1316,7 +1314,7 @@ class ParseObjectTest extends TestCase
 
     public function testAsocSetArrayWithNonArrayValue()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Exception',
             'Must use set() for non-array values.'
         );
@@ -1326,7 +1324,7 @@ class ParseObjectTest extends TestCase
 
     public function testRemovingNullKey()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Exception',
             'key may not be null.'
         );
@@ -1353,7 +1351,7 @@ class ParseObjectTest extends TestCase
 
     public function testFetchAllMixedClasses()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Parse\ParseException',
             'All objects should be of the same class.'
         );
@@ -1372,7 +1370,7 @@ class ParseObjectTest extends TestCase
 
     public function testFetchAllUnsavedWithoutId()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Parse\ParseException',
             'All objects must have an ID.'
         );
@@ -1386,7 +1384,7 @@ class ParseObjectTest extends TestCase
 
     public function testFetchAllUnsavedWithId()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Parse\ParseException',
             'All objects must exist on the server.'
         );
@@ -1456,7 +1454,7 @@ class ParseObjectTest extends TestCase
 
     public function testToPointerWithoutId()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Exception',
             "Can't serialize an unsaved ParseObject"
         );
@@ -1479,7 +1477,7 @@ class ParseObjectTest extends TestCase
 
     public function testSubclassRegisterMissingParseClassName()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Exception',
             'Cannot register a subclass that does not have a parseClassName'
         );
@@ -1498,7 +1496,7 @@ class ParseObjectTest extends TestCase
 
     public function testGettingQueryForUnregisteredSubclass()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Exception',
             'Cannot create a query for an unregistered subclass.'
         );
@@ -1758,7 +1756,7 @@ class ParseObjectTest extends TestCase
      */
     public function testUnrecognizedOp()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Parse\ParseException',
             "Unrecognized op 'Unrecognized' found during decode."
         );

@@ -1,15 +1,21 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Bfriedman
+ * Date: 11/7/17
+ * Time: 12:40
+ */
 
 namespace Parse\Test;
 
+use Parse\ParseException;
 use Parse\ParseLogs;
 use Parse\ParseObject;
+use Parse\ParseUser;
 
-use PHPUnit\Framework\TestCase;
-
-class ParseLogsTest extends TestCase
+class ParseLogsTest extends \PHPUnit_Framework_TestCase
 {
-    public static function setUpBeforeClass() : void
+    public static function setUpBeforeClass()
     {
         // setup 15 log entries that we can reference
         $objs = [];
@@ -20,7 +26,7 @@ class ParseLogsTest extends TestCase
         ParseObject::saveAll($objs);
     }
 
-    public static function tearDownAfterClass() : void
+    public static function tearDownAfterClass()
     {
         Helper::clearClass('TestObject');
     }

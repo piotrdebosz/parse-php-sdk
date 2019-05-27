@@ -7,21 +7,19 @@ use Parse\ParsePolygon;
 use Parse\ParseObject;
 use Parse\ParseQuery;
 
-use PHPUnit\Framework\TestCase;
-
-class ParsePolygonTest extends TestCase
+class ParsePolygonTest extends \PHPUnit_Framework_TestCase
 {
-    public static function setUpBeforeClass() : void
+    public static function setUpBeforeClass()
     {
         Helper::setUp();
     }
 
-    public function setup() : void
+    public function setUp()
     {
         Helper::clearClass('TestObject');
     }
 
-    public function tearDown() : void
+    public function tearDown()
     {
         Helper::tearDown();
     }
@@ -97,7 +95,7 @@ class ParsePolygonTest extends TestCase
 
     public function testPolygonMinimum()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Parse\ParseException',
             'Polygon must have at least 3 GeoPoints or Points'
         );
@@ -109,7 +107,7 @@ class ParsePolygonTest extends TestCase
 
     public function testPolygonInvalidInput()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Parse\ParseException',
             'Coordinates must be an Array'
         );
@@ -121,7 +119,7 @@ class ParsePolygonTest extends TestCase
 
     public function testPolygonInvalidArray()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Parse\ParseException',
             'Coordinates must be an Array of GeoPoints or Points'
         );
@@ -160,7 +158,7 @@ class ParsePolygonTest extends TestCase
 
     public function testPolygonContainsInvalidInput()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Parse\ParseException',
             'bad $geoIntersect value; $point should be GeoPoint'
         );

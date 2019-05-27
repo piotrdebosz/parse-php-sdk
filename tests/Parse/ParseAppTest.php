@@ -3,18 +3,18 @@
 namespace Parse\Test;
 
 use Parse\ParseApp;
-use PHPUnit\Framework\TestCase;
+use PHPUnit_Framework_TestCase;
 
-class ParseAppTest extends TestCase
+class ParseAppTest extends PHPUnit_Framework_TestCase
 {
-    public static function setUpBeforeClass() : void
+    public static function setUpBeforeClass()
     {
         Helper::setUp();
     }
 
     public function testFetchingApps()
     {
-        $this->expectException(
+        $this->setExpectedException(
             'Parse\ParseException',
             'unauthorized'
         );
@@ -28,7 +28,7 @@ class ParseAppTest extends TestCase
 
     public function testFetchSingleApp()
     {
-        $this->expectException(
+        $this->setExpectedException(
             'Parse\ParseException',
             'unauthorized'
         );
@@ -44,13 +44,13 @@ class ParseAppTest extends TestCase
     {
         $invalid_application_id = '1YkU7V110nEDUqU7ctCEbLr6xcgQgdEkePuBaw6P';
 
-        $this->expectException('Parse\ParseException', 'unauthorized');
+        $this->setExpectedException('Parse\ParseException', 'unauthorized');
         ParseApp::fetchApp($invalid_application_id);
     }
 
     public function testCreateApp()
     {
-        $this->expectException(
+        $this->setExpectedException(
             'Parse\ParseException',
             'unauthorized'
         );
@@ -70,7 +70,7 @@ class ParseAppTest extends TestCase
 
     public function testNameAlreadyInAccount()
     {
-        $this->expectException(
+        $this->setExpectedException(
             'Parse\ParseException',
             'unauthorized'
         );
@@ -81,7 +81,7 @@ class ParseAppTest extends TestCase
             'appName' => $app_name,
         ]);
 
-        $this->expectException('Parse\ParseException', 'App name must not already be used in your account');
+        $this->setExpectedException('Parse\ParseException', 'App name must not already be used in your account');
         ParseApp::createApp([
             'appName' => $app_name,
         ]);
@@ -89,7 +89,7 @@ class ParseAppTest extends TestCase
 
     public function testUpdateApp()
     {
-        $this->expectException(
+        $this->setExpectedException(
             'Parse\ParseException',
             'unauthorized'
         );

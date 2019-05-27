@@ -5,12 +5,10 @@ use Parse\ParseClient;
 use Parse\ParseUser;
 use Parse\ParseSession;
 
-use PHPUnit\Framework\TestCase;
-
-class ParseSessionFixationTest extends TestCase
+class ParseSessionFixationTest extends \PHPUnit_Framework_TestCase
 {
 
-    public static function setUpBeforeClass() : void
+    public static function setUpBeforeClass()
     {
         Helper::clearClass(ParseUser::$parseClassName);
         Helper::clearClass(ParseSession::$parseClassName);
@@ -29,7 +27,7 @@ class ParseSessionFixationTest extends TestCase
         Helper::setUp();
     }
 
-    public function tearDown() : void
+    public function tearDown()
     {
         Helper::tearDown();
         Helper::clearClass(ParseUser::$parseClassName);
@@ -37,7 +35,7 @@ class ParseSessionFixationTest extends TestCase
         ParseUser::logout();
     }
 
-    public static function tearDownAfterClass() : void
+    public static function tearDownAfterClass()
     {
         session_destroy();
     }

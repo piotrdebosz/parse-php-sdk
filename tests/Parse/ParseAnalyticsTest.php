@@ -4,16 +4,14 @@ namespace Parse\Test;
 
 use Parse\ParseAnalytics;
 
-use PHPUnit\Framework\TestCase;
-
-class ParseAnalyticsTest extends TestCase
+class ParseAnalyticsTest extends \PHPUnit_Framework_TestCase
 {
-    public static function setUpBeforeClass() : void
+    public static function setUpBeforeClass()
     {
         Helper::setUp();
     }
 
-    public function tearDown() : void
+    public function tearDown()
     {
         Helper::tearDown();
     }
@@ -35,7 +33,7 @@ class ParseAnalyticsTest extends TestCase
 
     public function testFailsOnEventName1()
     {
-        $this->expectException(
+        $this->setExpectedException(
             'Exception',
             'A name for the custom event must be provided.'
         );
@@ -44,7 +42,7 @@ class ParseAnalyticsTest extends TestCase
 
     public function testFailsOnEventName2()
     {
-        $this->expectException(
+        $this->setExpectedException(
             'Exception',
             'A name for the custom event must be provided.'
         );
@@ -53,7 +51,7 @@ class ParseAnalyticsTest extends TestCase
 
     public function testFailsOnEventName3()
     {
-        $this->expectException(
+        $this->setExpectedException(
             'Exception',
             'A name for the custom event must be provided.'
         );
@@ -82,7 +80,7 @@ class ParseAnalyticsTest extends TestCase
 
     public function testBadKeyDimension()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Exception',
             'Dimensions expected string keys and values.'
         );
@@ -91,7 +89,7 @@ class ParseAnalyticsTest extends TestCase
 
     public function testBadValueDimension()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Exception',
             'Dimensions expected string keys and values.'
         );

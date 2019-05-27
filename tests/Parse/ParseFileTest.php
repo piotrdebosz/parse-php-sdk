@@ -6,16 +6,14 @@ use Parse\ParseFile;
 use Parse\ParseObject;
 use Parse\ParseQuery;
 
-use PHPUnit\Framework\TestCase;
-
-class ParseFileTest extends TestCase
+class ParseFileTest extends \PHPUnit_Framework_TestCase
 {
-    public static function setUpBeforeClass() : void
+    public static function setUpBeforeClass()
     {
         Helper::setUp();
     }
 
-    public function tearDown() : void
+    public function tearDown()
     {
         Helper::tearDown();
         Helper::clearClass('TestFileObject');
@@ -68,7 +66,7 @@ class ParseFileTest extends TestCase
      */
     public function testParseFileDownloadUnsaved()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Parse\ParseException',
             'Cannot retrieve data for unsaved ParseFile.'
         );
@@ -81,7 +79,7 @@ class ParseFileTest extends TestCase
      */
     public function testParsefileDeleteUnsaved()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Parse\ParseException',
             'Cannot delete file that has not been saved.'
         );
@@ -98,10 +96,10 @@ class ParseFileTest extends TestCase
 
         if (!isset($USE_CLIENT_STREAM)) {
             // curl exception expectation
-            $this->expectException('\Parse\ParseException', '', 6);
+            $this->setExpectedException('\Parse\ParseException', '', 6);
         } else {
             // stream exception expectation
-            $this->expectException('\Parse\ParseException', '', 2);
+            $this->setExpectedException('\Parse\ParseException', '', 2);
         }
 
         $file = ParseFile::_createFromServer('file.txt', 'http://404.example.com');
@@ -208,7 +206,7 @@ class ParseFileTest extends TestCase
         $this->assertEquals($data, $contents);
         $file->delete();
         $fileAgain = ParseFile::_createFromServer($name, $url);
-        $this->expectException('Parse\ParseException', 'Download failed');
+        $this->setExpectedException('Parse\ParseException', 'Download failed');
         $fileAgain->getData();
     }
 }

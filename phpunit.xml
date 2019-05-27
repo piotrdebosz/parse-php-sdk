@@ -12,10 +12,11 @@
         stopOnFailure="false"
         stopOnSkipped="false"
         stopOnIncomplete="false"
-        verbose="false"
+        syntaxCheck="false"
+        verbose="true"
         >
     <testsuites>
-        <testsuite name="parse-php-sdk">
+        <testsuite>
             <directory suffix="Test.php">./tests</directory>
         </testsuite>
     </testsuites>

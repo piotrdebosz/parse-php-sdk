@@ -11,16 +11,15 @@ use Parse\Internal\IncrementOperation;
 use Parse\Internal\SetOperation;
 use Parse\ParseClient;
 use Parse\ParseObject;
-use PHPUnit\Framework\TestCase;
 
-class AddUniqueOperationTest extends TestCase
+class AddUniqueOperationTest extends \PHPUnit_Framework_TestCase
 {
-    public static function setUpBeforeClass() : void
+    public static function setUpBeforeClass()
     {
         Helper::setUp();
     }
 
-    public function tearDown() : void
+    public function tearDown()
     {
         Helper::clearClass('TestObject');
     }
@@ -44,7 +43,7 @@ class AddUniqueOperationTest extends TestCase
      */
     public function testBadObjects()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Parse\ParseException',
             'AddUniqueOperation requires an array.'
         );
@@ -107,7 +106,7 @@ class AddUniqueOperationTest extends TestCase
      */
     public function testInvalidMerge()
     {
-        $this->expectException(
+        $this->setExpectedException(
             '\Parse\ParseException',
             'Operation is invalid after previous operation.'
         );

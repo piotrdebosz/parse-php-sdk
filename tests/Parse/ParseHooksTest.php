@@ -5,28 +5,28 @@ namespace Parse\Test;
 use Parse\ParseException;
 use Parse\ParseHooks;
 use Parse\ParseSchema;
-use PHPUnit\Framework\TestCase;
+use PHPUnit_Framework_TestCase;
 
-class ParseHooksTest extends TestCase
+class ParseHooksTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @var ParseHooks
      */
     private static $hooks;
 
-    public static function setUpBeforeClass() : void
+    public static function setUpBeforeClass()
     {
         Helper::setUp();
     }
 
-    public function setup() : void
+    public function setUp()
     {
         $createClass = new ParseSchema('Game');
         $createClass->save();
         self::$hooks = new ParseHooks();
     }
 
-    public function tearDown() : void
+    public function tearDown()
     {
         $createClass = new ParseSchema('Game');
         $createClass->delete();
@@ -48,7 +48,7 @@ class ParseHooksTest extends TestCase
 
     public function testSingleFunctionNotFound()
     {
-        $this->expectException('Parse\ParseException', 'no function named: sendMessage is defined', 143);
+        $this->setExpectedException('Parse\ParseException', 'no function named: sendMessage is defined', 143);
         self::$hooks->fetchFunction('sendMessage');
     }
 
@@ -59,7 +59,7 @@ class ParseHooksTest extends TestCase
 
     public function testSingleTriggerNotFound()
     {
-        $this->expectException('Parse\ParseException', 'class Scores does not exist', 143);
+        $this->setExpectedException('Parse\ParseException', 'class Scores does not exist', 143);
         self::$hooks->fetchTrigger('Scores', 'beforeSave');
     }
 
